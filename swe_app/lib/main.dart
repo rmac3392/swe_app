@@ -38,20 +38,26 @@ class _MyAppState extends State<MyApp> {
               width: 48,
             ),
           ),
-          centerTitle: true,
-          title: Container(
-            child: (Text(
+          title: (Text(
               "S.W.C.S",
               style: GoogleFonts.notoSerif(
-                fontSize: 38,
+                fontSize: 35,
                 fontWeight: FontWeight.bold,
               ),
             )),
-          ),
+          actions: [
+            Container(
+              margin: EdgeInsets.all(5),
+            child: const  Icon(
+              Icons.menu_rounded,
+              size: 32,
+              ),
+            ),
+          ],
           backgroundColor: const Color(0xFF0F172A),
         ),
         body: MobileScanner(
-          // fit: BoxFit.contain,
+          
           controller: cameraController,
           onDetect: (capture) {
             final List<Barcode> barcodes = capture.barcodes;
@@ -65,6 +71,7 @@ class _MyAppState extends State<MyApp> {
             children: [
               Expanded(
                 child: Container(
+                  height: 100,
                   child: IconButton(
                     icon: ValueListenableBuilder(
                       valueListenable: cameraController.torchState,
@@ -73,25 +80,26 @@ class _MyAppState extends State<MyApp> {
                           case TorchState.off:
                             return const Icon(
                               Icons.flash_off_rounded,
-                              size: 27,
+                              size: 47,
                               color: Color(0xFF0F172A),
                             );
                           case TorchState.on:
                             return const Icon(
                               Icons.flash_on_rounded,
-                              size: 27,
+                              size: 47,
                               color: Color(0xFF0F172A),
                             );
                         }
                       },
                     ),
-                    iconSize: 32.0,
+                    iconSize: 42.0,
                     onPressed: () => cameraController.toggleTorch(),
                   ),
                 ),
               ),
               Expanded(
                 child: Container(
+                  height: 150,
                   child: IconButton(
                     onPressed: () {
                       setState(() {
@@ -100,7 +108,7 @@ class _MyAppState extends State<MyApp> {
                     },
                     icon: const Icon(
                       Icons.camera,
-                      size: 32,
+                      size: 100,
                       color: Color(0xFF0F172A),
                     ),
                   ),
@@ -108,6 +116,7 @@ class _MyAppState extends State<MyApp> {
               ),
               Expanded(
                 child: Container(
+                  height: 150,
                   child: IconButton(
                     icon: ValueListenableBuilder(
                       valueListenable: cameraController.cameraFacingState,
@@ -116,19 +125,19 @@ class _MyAppState extends State<MyApp> {
                           case CameraFacing.front:
                             return const Icon(
                               Icons.camera_front_rounded,
-                              size: 27,
+                              size: 47,
                               color: Color(0xFF0F172A),
                             );
                           case CameraFacing.back:
                             return const Icon(
                               Icons.camera_rear_rounded,
-                              size: 27,
+                              size: 47,
                               color: Color(0xFF0F172A),
                             );
                         }
                       },
                     ),
-                    iconSize: 32.0,
+                    iconSize: 42.0,
                     onPressed: () => cameraController.switchCamera(),
                   ),
                 ),
