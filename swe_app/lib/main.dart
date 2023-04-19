@@ -19,6 +19,8 @@ class _MyAppState extends State<MyApp> {
   MobileScannerController cameraController = MobileScannerController();
   bool _screenOpened = false;
 
+  List<Barcode> list_barCode = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +56,8 @@ class _MyAppState extends State<MyApp> {
         controller: cameraController,
         onDetect: (capture) {
           final List<Barcode> barcodes = capture.barcodes;
+          list_barCode = capture.barcodes;
+
           for (final barcode in barcodes) {
             debugPrint('Barcode found! ${barcode.rawValue}');
           }
@@ -96,22 +100,43 @@ class _MyAppState extends State<MyApp> {
                 height: 150,
                 child: IconButton(
                   onPressed: () {
-                    void foundBarCode(
-                        Barcode barcode, MobileScannerArguments? args) {
-                      if (!_screenOpened) {
-                        final String code = barcode.rawValue ?? "---";
-                        debugPrint("Barcode found! $code");
-                        _screenOpened = true;
-                      }
-                    }
+                    // Stop scanning
+                    cameraController.stop();
 
-                    Navigator.push(
+                    // Check all barcodes if naay link
+                    for (Barcode barcode in list_barCode) {
+                        print("BRACODE ${barcode.rawValue}");
+                        //the link of the website
+                      if(barcode.rawValue == "http://en.m.wikipedia.org"){
+                        Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: ((context) => const MyDigitalForm())));
-                    setState(() {
-                      print("clicked camera");
-                    });
+                        builder: ((context) => const MyDigitalForm())));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(barcode.rawValue!)));
+                        break;
+                      }
+
+                    }
+
+                    // if naa, proceed sa next pahe
+                    // show toast that no link has been captured
+
+
+                    // void foundBarCode(
+                    //     Barcode barcode, MobileScannerArguments? args) {
+                    //   if (!_screenOpened) {
+                    //     final String code = barcode.rawValue ?? "---";
+                    //     debugPrint("Barcode found! $code");
+                    //     _screenOpened = true;
+                    //   }
+                    // }
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: ((context) => const MyDigitalForm())));
+                    // setState(() {
+                    //   print("clicked camera");
+                    // });
                   },
                   icon: const Icon(
                     Icons.camera,
