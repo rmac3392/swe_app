@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'digitalForm.dart';
 
+
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false, 
@@ -101,8 +102,7 @@ class _MyAppState extends State<MyApp> {
                 child: IconButton(
                   onPressed: () {
                     // Stop scanning
-                    cameraController.stop();
-
+                    // 
                     // Check all barcodes if naay link
                     for (Barcode barcode in list_barCode) {
                         print("BRACODE ${barcode.rawValue}");
@@ -113,30 +113,15 @@ class _MyAppState extends State<MyApp> {
                         MaterialPageRoute(
                         builder: ((context) => const MyDigitalForm())));
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(barcode.rawValue!)));
+                        cameraController.stop();
                         break;
+                      }
+                      else{
+                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Capture the QR Code Clearly")));
+                       
                       }
 
                     }
-
-                    // if naa, proceed sa next pahe
-                    // show toast that no link has been captured
-
-
-                    // void foundBarCode(
-                    //     Barcode barcode, MobileScannerArguments? args) {
-                    //   if (!_screenOpened) {
-                    //     final String code = barcode.rawValue ?? "---";
-                    //     debugPrint("Barcode found! $code");
-                    //     _screenOpened = true;
-                    //   }
-                    // }
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: ((context) => const MyDigitalForm())));
-                    // setState(() {
-                    //   print("clicked camera");
-                    // });
                   },
                   icon: const Icon(
                     Icons.camera,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class MyDigitalForm extends StatefulWidget {
   const MyDigitalForm({super.key});
@@ -8,8 +9,10 @@ class MyDigitalForm extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyDigitalForm> {
+  WebViewController controller = WebViewController()
+  ..setJavaScriptMode(JavaScriptMode.unrestricted)
+  ..loadRequest(Uri.parse('https://flutter.dev'));
   @override
-  // TODO: implement widget
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +43,9 @@ class _MyAppState extends State<MyDigitalForm> {
         ],
         backgroundColor: const Color(0xFF0F172A),
       ),
-      body: Column(),
+      body:WebViewWidget(
+        controller: controller
+      ),
     );
   }
 }
