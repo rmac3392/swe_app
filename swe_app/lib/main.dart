@@ -107,7 +107,7 @@ class _MyAppState extends State<MyApp> {
                     for (Barcode barcode in list_barCode) {
                         print("BRACODE ${barcode.rawValue}");
                         //the link of the website
-                      if(barcode.rawValue == "http://en.m.wikipedia.org"){
+                      if(barcode.rawValue == "http://192.168.160.216:5173/mobilePage1"){
                         Navigator.push(
                         context,
                         MaterialPageRoute(
