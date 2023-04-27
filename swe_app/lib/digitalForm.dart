@@ -10,8 +10,8 @@ class MyDigitalForm extends StatefulWidget {
 
 class _MyAppState extends State<MyDigitalForm> {
   WebViewController controller = WebViewController()
-  ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  ..loadRequest(Uri.parse('https://flutter.dev'));
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..loadRequest(Uri.parse('192.168.1.236/mobilePage1'));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +43,7 @@ class _MyAppState extends State<MyDigitalForm> {
         ],
         backgroundColor: const Color(0xFF0F172A),
       ),
-      body:WebViewWidget(
-        controller: controller
-      ),
+      body: WebViewWidget(controller: controller),
     );
   }
 }

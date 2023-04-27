@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'digitalForm.dart';
-
+import 'qr_overlay.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false, 
-    home: MyApp()));
+  runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -53,17 +51,19 @@ class _MyAppState extends State<MyApp> {
         ],
         backgroundColor: const Color(0xFF0F172A),
       ),
-      body: MobileScanner(
-        controller: cameraController,
-        onDetect: (capture) {
-          final List<Barcode> barcodes = capture.barcodes;
-          list_barCode = capture.barcodes;
-
-          for (final barcode in barcodes) {
-            debugPrint('Barcode found! ${barcode.rawValue}');
-          }
-        },
-      ),
+      body: Stack(children: [
+        MobileScanner(
+          controller: cameraController,
+          onDetect: (capture) {
+            final List<Barcode> barcodes = capture.barcodes;
+            list_barCode = capture.barcodes;
+            for (final barcode in barcodes) {
+              debugPrint('Barcode found! ${barcode.rawValue}');
+            }
+          },
+        ),
+        QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5))
+      ]),
       bottomNavigationBar: BottomAppBar(
         color: const Color(0xFF0F172A),
         child: Row(
@@ -102,25 +102,25 @@ class _MyAppState extends State<MyApp> {
                 child: IconButton(
                   onPressed: () {
                     // Stop scanning
-                    // 
+                    //
                     // Check all barcodes if naay link
                     for (Barcode barcode in list_barCode) {
-                        print("BRACODE ${barcode.rawValue}");
-                        //the link of the website
-                      if(barcode.rawValue == "http://en.m.wikipedia.org"){
+                      print("BRACODE ${barcode.rawValue}");
+                      //the link of the website
+                      if (barcode.rawValue == "192.168.1.236/mobilePage1") {
                         Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                        builder: ((context) => const MyDigitalForm())));
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(barcode.rawValue!)));
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => const MyDigitalForm())));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(barcode.rawValue!)));
                         cameraController.stop();
                         break;
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Capture the QR Code Clearly")));
                       }
-                      else{
-                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Capture the QR Code Clearly")));
-                       
-                      }
-
                     }
                   },
                   icon: const Icon(
