@@ -105,9 +105,9 @@ class _MyAppState extends State<MyApp> {
                     //
                     // Check all barcodes if naay link
                     for (Barcode barcode in list_barCode) {
-                      print("BRACODE ${barcode.rawValue}");
-                      //the link of the website
-                      if (barcode.rawValue == "192.168.1.236/mobilePage1") {
+                        print("BRACODE ${barcode.rawValue}");
+                        //the link of the website
+                      if(barcode.rawValue == "http://192.168.160.216:5173/mobilePage1"){
                         Navigator.push(
                             context,
                             MaterialPageRoute(

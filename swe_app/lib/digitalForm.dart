@@ -10,8 +10,8 @@ class MyDigitalForm extends StatefulWidget {
 
 class _MyAppState extends State<MyDigitalForm> {
   WebViewController controller = WebViewController()
-    ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    ..loadRequest(Uri.parse('192.168.1.236/mobilePage1'));
+  ..setJavaScriptMode(JavaScriptMode.unrestricted)
+  ..loadRequest(Uri.parse('http://192.168.160.216:5173/mobilePage1'));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
