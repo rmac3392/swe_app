@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'digitalForm.dart';
 import 'qr_overlay.dart';
+import 'package:native_shutter_sound/native_shutter_sound.dart';
 
 void main() {
   runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
@@ -101,13 +102,14 @@ class _MyAppState extends State<MyApp> {
                 height: 150,
                 child: IconButton(
                   onPressed: () {
+                     NativeShutterSound.play();
                     // Stop scanning
                     //
                     // Check all barcodes if naay link
                     for (Barcode barcode in list_barCode) {
                         print("BRACODE ${barcode.rawValue}");
                         //the link of the website
-                      if(barcode.rawValue == "http://192.168.160.216:5173/mobilePage1"){
+                      if(barcode.rawValue == "http://192.168.161.183:5173/mobile1"){
                         Navigator.push(
                             context,
                             MaterialPageRoute(

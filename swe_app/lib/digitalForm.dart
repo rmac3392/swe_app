@@ -11,7 +11,7 @@ class MyDigitalForm extends StatefulWidget {
 class _MyAppState extends State<MyDigitalForm> {
   WebViewController controller = WebViewController()
   ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  ..loadRequest(Uri.parse('http://192.168.160.216:5173/mobilePage1'));
+  ..loadRequest(Uri.parse('http://192.168.161.183:5173/mobile1'));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
