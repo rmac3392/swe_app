@@ -11,7 +11,7 @@ class MyDigitalForm extends StatefulWidget {
 class _MyAppState extends State<MyDigitalForm> {
   WebViewController controller = WebViewController()
   ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  ..loadRequest(Uri.parse('http://192.168.161.183:5173/mobile1'));
+  ..loadRequest(Uri.parse('https://qmate.vercel.app/mobile1'));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
